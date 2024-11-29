@@ -1,6 +1,7 @@
 const express = require('express');
-const { resolve } = require('path');
 const cors = require('cors');
+const { resolve } = require('path');
+
 
 const app = express();
 const port = 3000;
@@ -224,7 +225,7 @@ app.get('/hotels/sort/pricing', (req, res) => {
   }else{
     hotelsCopy.sort(hotelDecendedByPricing);
   }
-  res.json(hotelsCopy);
+  res.json({hotels: hotelsCopy});
 });
 
 //Endpoint 2: Get the hotels sorted based on their Ratings
@@ -242,7 +243,7 @@ app.get('/hotels/sort/rating', (req, res) => {
   }else{
     hotelsCopy.sort(hotelDecendedByRating);
   }
-  res.json(hotelsCopy);
+  res.json({hotels: hotelsCopy});
 });
 
 //Endpoint 3: Get the Hotels sorted based on their Reviews
@@ -260,7 +261,7 @@ app.get('/hotels/sort/reviews', (req, res) => {
   }else{
     hotelsCopy.sort(hotelDecendedByRating);
   }
-  res.json(hotelsCopy);
+  res.json({hotels : hotelsCopy});
 });
 
 //Endpoint 4: Filter the hotels based on the Hotel Amenity
@@ -270,7 +271,7 @@ function filterByAmenity (hotelsObj, amenity) {
 app.get('/hotels/filter/amenity', (req, res) => {
   let amenity = req.query.amenity;
   let result = hotels.filter(hotelsObj => filterByAmenity(hotelsObj, amenity));
-  res.json(result);
+  res.json({hotels: result});
 });
 
 //Endpoint 5: Filter the hotels based on the selected Country
@@ -280,7 +281,7 @@ function filterByCountry (hotelsObj, country) {
 app.get('/hotels/filter/country', (req, res) => {
   let country = req.query.country;
   let result = hotels.filter(hotelsObj => filterByCountry(hotelsObj, country));
-  res.json(result);
+  res.json({hotels: result});
 });
 
 //Endpoint 6: Filter the hotels based on the selected Category
@@ -290,12 +291,12 @@ function filterByCategory (hotelsObj, category){
 app.get('/hotels/filter/category', (req, res) => {
   let category = req.query.category;
   let result = hotels.filter(hotelsObj => filterByCategory(hotelsObj, category));
-  res.json(result);
+  res.json({hotels: result});
 })
 
 //Endpoint 7: Send all hotels
 app.get('/hotels', (req, res) => {
-  res.json(hotels);
+  res.json({hotels: hotels});
 })
 
 
